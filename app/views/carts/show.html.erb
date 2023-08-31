@@ -3,7 +3,7 @@
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
-
+    <%= pluralize(session[:counter], 'Visit Count') if session[:counter] >= 5 %>
     <%= render @cart %>
 
     <%= link_to 'Edit this cart', edit_cart_path(@cart), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>

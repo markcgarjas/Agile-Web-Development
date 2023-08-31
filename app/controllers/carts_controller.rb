@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[ show edit update destroy ]
+  before_action :new_item?, only: :show
 
   # GET /carts or /carts.json
   def index
@@ -8,6 +9,14 @@ class CartsController < ApplicationController
 
   # GET /carts/1 or /carts/1.json
   def show
+    session[:counter] ||= 0
+
+    if new_item?
+      session[:counter] = 0
+      session[:latest_line_item_created_at] = Time.now
+    else
+      session[:counter] += 1
+    end
   end
 
   # GET /carts/new
@@ -58,13 +67,22 @@ class CartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cart
-      @cart = Cart.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def cart_params
-      params.fetch(:cart, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_cart
+    @cart = Cart.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def cart_params
+    params.fetch(:cart, {})
+  end
+
+  def new_item?
+    latest_line_item = LineItem.where(cart: @cart).order(created_at: :desc).first
+
+    return false if latest_line_item.nil?
+
+    latest_line_item.created_at > session[:latest_line_item_created_at]
+  end
 end
