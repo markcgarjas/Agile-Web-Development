@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: %i[ show edit update destroy ]
   before_action :new_item?, only: :show
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
 
   # GET /carts or /carts.json
   def index
@@ -84,5 +85,11 @@ class CartsController < ApplicationController
     return false if latest_line_item.nil?
 
     latest_line_item.created_at > session[:latest_line_item_created_at]
+  end
+
+  def invalid_cart
+    Rails.logger.error("Attempt to access invalid cart #{params[:id]}")
+    flash[:notice] = "Attempt to access invalid cart #{params[:id]}"
+    redirect_to store_index_path
   end
 end
