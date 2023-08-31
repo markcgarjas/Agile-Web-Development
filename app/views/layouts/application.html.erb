@@ -12,13 +12,15 @@
   </head>
 
   <body class="bg-black ">
-    <header class="bg-green-700">
+    <header class="bg-green-700 text-white">
       <%= image_tag 'header.png', alt: 'The Pragmatic Book Shelf', width: 200 %>
       <h1>App</h1>
     </header>
 
-    <section class="flex">
+    <section class="flex text-white">
       <nav class="bg-green-900 p-6">
+        <%= DateTime.current.strftime("%B %d, %Y (%H:%M:%S)") %>
+
         <ul class="text-gray-300 leading-8">
           <li><%= link_to 'Home', root_path %></li>
           <li><%= link_to 'Questions', root_path %></li>
@@ -26,7 +28,7 @@
           <li><%= link_to 'Contact', root_path %></li>
         </ul>
       </nav>
-      <main class="text-white container mx-auto mt-28 px-5 flex">
+      <main class="text-white container mx-auto mt-4 px-5 flex">
         <%= yield %>
       </main>
     </section>
