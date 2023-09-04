@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>Pragprog Books Online Store</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -15,8 +15,9 @@
     <header class="bg-green-700 d-flex justify-content-between">
       <div>
         <%= image_tag 'header.png', alt: 'The Pragmatic Book Shelf', width: 200 %>
+        <h1><% @page_title %></h1>
       </div>
-      <div class="d-flex justify-content-center align-content-center">
+      <div>
         <%= DateTime.current.strftime("%B %d, %Y (%H:%M:%S)") %>
       </div>
     </header>
