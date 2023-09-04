@@ -1,16 +1,14 @@
-<div id="<%= dom_id cart %>">
-  <h2 class="font-bold text-lg mb-3">Your Pragmatic Cart</h2>
+<div id="<%= dom_id cart %>" class="mb-4 p-3">
+  <h2 class="font-bold text-lg mb-3">Your Cart</h2>
+
+  <%= render cart.line_items %>
 
   <ul class="list-none list-inside"></ul>
 
-  <ul class="list-disc list-inside">
-    <% cart.line_items.each do |item| %>
-      <li><%= item.quantity %> &times; <%= item.product.title %></li>
-    <% end %>
-  </ul>
+  <%= button_to 'Empty Cart', cart, method: :delete, class: 'ml-4 mb-4 rounded-lg py-1 px-2 text-white bg-green-600' %>
   <% if action_name != "show" %>
-    <%= link_to "Show this cart", cart, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this cart', edit_cart_path(cart), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to "Show this cart", cart, class: "rounded-lg py-3 text-black px-5 bg-gray-100 inline-block font-medium" %>
+    <%= link_to 'Edit this cart', edit_cart_path(cart), class: "rounded-lg text-black py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
     <hr class="mt-6">
   <% end %>
 </div>
