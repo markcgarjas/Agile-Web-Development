@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 class OrdersController < ApplicationController
   include CurrentCart
-  before_action :set_cart, only: %i[ new create ]
+  before_action :set_cart, only: %i[new create]
   before_action :ensure_cart_isnt_empty, only: :new
-  before_action :set_order, only: %i[ show edit update destroy ]
+  before_action :set_order, only: %i[show edit update destroy]
 
   # GET /orders or /orders.json
   def index
@@ -10,8 +12,7 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1 or /orders/1.json
-  def show
-  end
+  def show; end
 
   # GET /orders/new
   def new
@@ -19,8 +20,7 @@ class OrdersController < ApplicationController
   end
 
   # GET /orders/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /orders or /orders.json
   def create
@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        format.html { redirect_to store_index_path, notice: "Thank you for your order" }
+        format.html { redirect_to store_index_path, notice: 'Thank you for your order' }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to order_url(@order), notice: "Order was successfully updated." }
+        format.html { redirect_to order_url(@order), notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
     @order.destroy
 
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: "Order was successfully destroyed." }
+      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -76,8 +76,8 @@ class OrdersController < ApplicationController
   end
 
   def ensure_cart_isnt_empty
-    if @cart.line_items.empty?
-      redirect_to store_index_path, notice: ' Your Cart is empty'
-    end
+    return unless @cart.line_items.empty?
+
+    redirect_to store_index_path, notice: ' Your Cart is empty'
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,43 +12,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_132622) do
-  create_table "carts", charset: "utf8mb4", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+ActiveRecord::Schema[7.0].define(version: 20_230_904_132_622) do
+  create_table 'carts', charset: 'utf8mb4', force: :cascade do |t|
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "line_items", charset: "utf8mb4", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "cart_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "quantity", default: 1
-    t.bigint "order_id"
-    t.index ["cart_id"], name: "index_line_items_on_cart_id"
-    t.index ["order_id"], name: "index_line_items_on_order_id"
-    t.index ["product_id"], name: "index_line_items_on_product_id"
+  create_table 'line_items', charset: 'utf8mb4', force: :cascade do |t|
+    t.bigint 'product_id', null: false
+    t.bigint 'cart_id'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.integer 'quantity', default: 1
+    t.bigint 'order_id'
+    t.index ['cart_id'], name: 'index_line_items_on_cart_id'
+    t.index ['order_id'], name: 'index_line_items_on_order_id'
+    t.index ['product_id'], name: 'index_line_items_on_product_id'
   end
 
-  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.text "address"
-    t.string "email"
-    t.integer "pay_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'orders', charset: 'utf8mb4', force: :cascade do |t|
+    t.string 'name'
+    t.text 'address'
+    t.string 'email'
+    t.integer 'pay_type'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  create_table "products", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.decimal "price", precision: 10
-    t.string "image_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table 'products', charset: 'utf8mb4', force: :cascade do |t|
+    t.string 'title'
+    t.text 'description'
+    t.decimal 'price', precision: 10
+    t.string 'image_url'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
-  add_foreign_key "line_items", "carts"
-  add_foreign_key "line_items", "orders"
-  add_foreign_key "line_items", "products"
+  add_foreign_key 'line_items', 'carts'
+  add_foreign_key 'line_items', 'orders'
+  add_foreign_key 'line_items', 'products'
 end
