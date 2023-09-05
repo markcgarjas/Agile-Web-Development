@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  enum pay_type: { client: 0, admin: 1, super_admin: 2 }
+  enum pay_type: { 'Check' => 0, 'Credit Card' => 1, 'Purchase Order' => 2 }
 
   has_many :line_items, dependent: :destroy
 
